@@ -6,7 +6,7 @@ public class Animal {
     public int age;
     public String favoriteFood;
   
-    public void animal() {
+    public  void newAnimal() {
       type = "unkown";
       name = "unkown";
       color = "unkown";
@@ -16,7 +16,7 @@ public class Animal {
     }
   
     
-    public void animal(String t, String n, String c, int a, String f) {
+    public  void newAnimal(String t, String n, String c, int a, String f) {
       type = t;
       name = n;
       color = c;
@@ -32,5 +32,8 @@ public class Animal {
       System.out.println(a.type);
       System.out.println(a.age);
       System.out.println(a.name);
+
+      Animal b = new Animal();
+      System.out.println(b.type);
     }
   }
