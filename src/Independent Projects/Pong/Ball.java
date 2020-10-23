@@ -12,6 +12,9 @@ public class Ball extends Rectangle
     int xVelocity;
     int yVelocity;
     int initialSpeed = 2;
+
+    Color ballColor = Color.white;
+    Color randomColor;
  
     Ball(int x, int y, int width, int height)
     {
@@ -26,7 +29,7 @@ public class Ball extends Rectangle
         if(randomYDirection == 0)
             randomYDirection--;
         setYDirection(randomXDirection*initialSpeed);
-    
+
     }
 
     public void setXDirection(int randomXDirection)
@@ -47,18 +50,18 @@ public class Ball extends Rectangle
 
     public void draw(Graphics g)
     {
-        g.setColor(Color.white);
+        g.setColor(ballColor);
         g.fillOval(x, y, height, width);
     }
 
-    public void changeColor(Graphics g)
+    public void changeBallColor()
     {
-        Color[] colors = new Color[] {Color.white, Color.blue, Color.magenta, Color.red};
+        Color[] colors = new Color[] {Color.red, Color.green, Color.blue, Color.yellow, Color.magenta, Color.cyan, Color.pink, Color.orange};
         
         int index = random.nextInt(colors.length);
-        Color randomColor = colors[index];
+        randomColor = colors[index];
 
-        g.setColor(randomColor);
+        ballColor = randomColor;
     }
 
 }

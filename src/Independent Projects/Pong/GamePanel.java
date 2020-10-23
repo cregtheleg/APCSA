@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import sun.audio.AudioData;  
+import sun.audio.AudioPlayer;  
+import sun.audio.AudioStream;  
+import sun.audio.ContinuousAudioDataStream;  
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -23,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable
     Ball ball;
     Score score;
 
-    double difficulty = .5;
+    double difficulty = 1;
 
     
     GamePanel()
@@ -90,14 +94,17 @@ public class GamePanel extends JPanel implements Runnable
         if(ball.intersects(paddle1))
         {
             ball.xVelocity = Math.abs(ball.xVelocity);
-            ball.xVelocity++; //optional for more difficulty
+            ball.xVelocity += difficulty; //optional for more difficulty
             if(ball.yVelocity > 0)
-                ball.yVelocity++; //optional for more difficulty
+                ball.yVelocity += difficulty; //optional for more difficulty
             else
-                ball.yVelocity--;
+                ball.yVelocity -= difficulty;
 
             ball.setXDirection(ball.xVelocity);
             ball.setYDirection(ball.yVelocity);
+
+
+            ball.changeBallColor();
 
             score.gameScore++;
             if (score.gameScore > score.highScore)
@@ -112,10 +119,12 @@ public class GamePanel extends JPanel implements Runnable
             if(ball.yVelocity > 0)
                 ball.yVelocity += difficulty; //optional for more difficulty
             else
-                ball.yVelocity--;
+                ball.yVelocity -= difficulty;
 
             ball.setXDirection(-ball.xVelocity);
             ball.setYDirection(ball.yVelocity);
+
+            ball.changeBallColor();
 
             score.gameScore++;
             if (score.gameScore > score.highScore)
@@ -144,7 +153,7 @@ public class GamePanel extends JPanel implements Runnable
         }
         if (ball.x >= (GAME_WIDTH-BALL_DIAMETER)) 
         {
-            System.out.println("You scored " + score);
+            System.out.println("You scored " + score.gameScore);
             System.out.println("Your high score is " + score.highScore);
             score.gameScore = 0;
             newPaddles();
@@ -173,7 +182,6 @@ public class GamePanel extends JPanel implements Runnable
                 checkCollision();
                 repaint();
                 delta--;
-                System.out.println("TEST");
             }
         }
     }
